@@ -68,7 +68,7 @@ export default class LoginView extends Vue {
 
     created() {
         if (ProfileTool.isDev()) {
-            this.email = "admin@template.com"
+            this.email = "admin@somacode.com"
             this.password = "1234"
         }
 
@@ -83,18 +83,11 @@ export default class LoginView extends Vue {
     }
 
     count: number = 0
-    rotation: number = 0
     developLogin() {
         this.count++
         if (this.count % 3 == 0) {
-            switch (this.rotation) {
-                case 0: this.email = "admin@template.com"; break
-                case 1: this.email = "admin2@template.com"; break
-                case 2: this.email = "admin3@template.com"; break
-            }
+            this.email = "admin@somacode.com"
             this.password = "1234"
-            this.rotation++
-            if (this.rotation > 2) this.rotation = 0
         }
     }
 }
