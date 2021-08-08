@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar app clipped-left elevation="0">
+    <v-app-bar app clipped-left elevation="0" height="80">
         <v-toolbar-title class="mr-8">Somacode Books</v-toolbar-title>
 
         <v-btn class="ma-1" elevation="0">Inicio</v-btn>
