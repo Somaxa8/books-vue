@@ -10,20 +10,20 @@
                     <v-text-field
                         @keydown.enter="$refs.loginButton.$el.click()"
                         v-model="email" label="Email" name="email"
-                        prepend-icon="mdi-email" type="email"
+                        prepend-icon="mdi-email" type="email" light
                         :rules="emailRules" @click:prepend="developLogin()"
                     />
 
                     <v-text-field
                         @keydown.enter="$refs.loginButton.$el.click()"
-                        v-model="password" label="Contraseña"
+                        v-model="password" label="Contraseña" light
                         name="password" prepend-icon="mdi-lock"
                         :type="showPassword ? 'text' : 'password'"
                         @click:append="showPassword = !showPassword"
                         :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'" :rules="passwordRules"
                     />
                     <v-btn
-                        class="mb-15 mt-4" :loading="progress"
+                        class="mb-15 mt-4" :loading="progress" light
                         ref="loginButton" :key="loginButtonReset" block
                         color="primary" large @click.once="login()">Acceder
                     </v-btn>
