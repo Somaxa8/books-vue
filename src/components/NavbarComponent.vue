@@ -1,35 +1,32 @@
 <template>
-    <v-app-bar app clipped-left color="secondary">
-        <v-app-bar-nav-icon class="mr-1" color="white"></v-app-bar-nav-icon>
+    <v-app-bar app clipped-left elevation="0">
+        <v-toolbar-title class="mr-8">Somacode Books</v-toolbar-title>
 
-        <v-divider vertical inset></v-divider>
-        <v-img src="@/assets/logo.png" aspect-ratio="1" max-width="40" max-height="40" class="mx-4 logo-tint"/>
+        <v-btn class="ma-1" elevation="0">Inicio</v-btn>
+        <v-btn class="ma-1" elevation="0">Mis Libros</v-btn>
+        <v-btn class="ma-1" elevation="0">Mis Favoritos</v-btn>
 
-        <v-toolbar-title class="white--text">{{projectName}}</v-toolbar-title>
+        <v-spacer/>
 
-        <v-spacer></v-spacer>
+        <div class="pt-2 mr-4">
+            <v-checkbox
+                class="pt-3" v-model="dark"
+                off-icon="mdi-theme-light-dark"
+                on-icon="mdi-theme-light-dark"
+            />
+        </div>
 
-        <v-menu bottom left>
-            <template v-slot:activator="{ on }">
-                <v-btn dark icon v-on="on">
-                    <v-icon>mdi-dots-vertical</v-icon>
-                </v-btn>
-            </template>
-
-            <v-list min-width="200">
-
-                <v-list-item>
-                    <v-switch v-model="dark" label="Dark" height="10"></v-switch>
-                </v-list-item>
-
-                <v-divider class="my-2"/>
-
-                <v-list-item @click="logout()">
-                    <v-list-item-title>Salir</v-list-item-title>
-                </v-list-item>
-
-            </v-list>
-        </v-menu>
+        <v-btn text large class="pa-1">
+            <div class="d-flex flex-column align-end mr-2">
+                <span class="grey--text text-capitalize" style="font-size: 10px">Admin</span>
+                <span class="text-capitalize">Silvio Franco</span>
+            </div>
+            <v-avatar color="indigo" size="35" rounded>
+                <v-icon dark>
+                    mdi-account-circle
+                </v-icon>
+            </v-avatar>
+        </v-btn>
 
     </v-app-bar>
 </template>
@@ -41,19 +38,23 @@ import SnackbarModule from "@/store/SnackbarModule";
 import LoginService from "@/services/LoginService";
 import SessionModule from "@/store/SessionModule";
 import ConstantTool from "@/services/tool/ConstantTool";
+
 @Component
 export default class NavbarComponent extends Vue {
     sessionModule: SessionModule = getModule(SessionModule)
     snackbarModule: SnackbarModule = getModule(SnackbarModule)
     projectName: string = ConstantTool.PROJECT_NAME
+
     get dark() {
         return this.$vuetify.theme.dark
     }
+
     set dark(v: boolean) {
         this.sessionModule.session.dark = v
         this.sessionModule.saveSession()
         this.$vuetify.theme.dark = v
     }
+
     logout() {
         LoginService.logout(this)
     }
