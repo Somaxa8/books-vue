@@ -13,7 +13,9 @@ export default class BookService {
         // @ts-ignore
         component.loading = true
         try {
-            const response = await component.axios.get("/public/books")
+            const response = await component.axios.get("/public/books", {
+                params: { page, size, search }
+            })
             let list = JsonTool.jsonConvert.deserializeArray(response.data, Book)
             books.splice(0, books.length)
             list.forEach(v => books.push(v))
@@ -119,7 +121,7 @@ export default class BookService {
             component.loading = false;
             // @ts-ignore
             component.refresh();
-            getModule(SnackbarModule).makeToast("Se ha eliminado el librop de manera exitosa!")
+            getModule(SnackbarModule).makeToast("Se ha eliminado el libro de manera exitosa!")
         } catch (err) {
             // @ts-ignore
             component.loading = false
