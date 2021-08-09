@@ -1,10 +1,10 @@
 <template>
-    <v-app-bar app clipped-left elevation="0" height="80">
+    <v-app-bar app clipped-left height="80" elevate-on-scroll>
         <v-toolbar-title class="mr-8">Somacode Books</v-toolbar-title>
 
-        <v-btn class="ma-1" elevation="0">Inicio</v-btn>
-        <v-btn class="ma-1" elevation="0">Mis Libros</v-btn>
-        <v-btn class="ma-1" elevation="0">Mis Favoritos</v-btn>
+        <v-btn class="ma-1 text-capitalize" elevation="0">Inicio</v-btn>
+        <v-btn class="ma-1 text-capitalize" elevation="0">Mis Libros</v-btn>
+        <v-btn class="ma-1 text-capitalize" elevation="0">Mis Favoritos</v-btn>
 
         <v-spacer/>
 
