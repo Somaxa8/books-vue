@@ -1,18 +1,16 @@
-import {Vue} from "vue-property-decorator";
-import Book from "@/models/Book";
 import JsonTool from "@/services/tool/JsonTool";
 import {getModule} from "vuex-module-decorators";
 import SnackbarModule from "@/store/SnackbarModule";
 import SessionModule from "@/store/SessionModule";
 
-export default class BookCategory {
+export default class BookCategoryService {
 
-    static async getBookCategories(component: Vue, bookCategories: BookCategory[]) {
+    static async getBookCategories(component: Vue, bookCategories: BookCategoryService[]) {
         // @ts-ignore
         component.loading = true
         try {
             const response = await component.axios.get("/public/book-categories")
-            let list = JsonTool.jsonConvert.deserializeArray(response.data, BookCategory)
+            let list = JsonTool.jsonConvert.deserializeArray(response.data, BookCategoryService)
             bookCategories.splice(0, bookCategories.length)
             list.forEach(v => bookCategories.push(v))
             // @ts-ignore
@@ -49,7 +47,7 @@ export default class BookCategory {
         }
     }
 
-    static async patchBookCategories(component: Vue, bookCategory: BookCategory) {
+    static async patchBookCategories(component: Vue, bookCategory: BookCategoryService) {
         // @ts-ignore
         component.loading = true
 
