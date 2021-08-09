@@ -3,6 +3,7 @@ import {JsonConverter, JsonCustomConvert, JsonObject, JsonProperty} from "json2t
 export enum AuthorityName {
     SUPERADMIN = "SUPERADMIN",
     ADMIN = "ADMIN",
+    USER = "USER"
 }
 
 @JsonConverter
