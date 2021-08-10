@@ -1,6 +1,7 @@
 <template>
     <v-app>
         <NavbarComponent v-if="showMenu()"/>
+        <DrawerComponent/>
         <v-main>
             <router-view/>
             <DialogComponent/>
@@ -14,13 +15,14 @@
 import Vue from "vue"
 import {Component} from "vue-property-decorator"
 import NavbarComponent from "@/components/NavbarComponent.vue";
+import DrawerComponent from "@/components/DrawerComponent.vue";
 import SnackbarComponent from "@/components/SnackbarComponent.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
 import DialogComponent from "@/components/DialogComponent.vue";
 import {getModule} from "vuex-module-decorators";
 import SessionModule from "@/store/SessionModule";
 
-@Component({components: {DialogComponent, NavbarComponent, FooterComponent, SnackbarComponent}})
+@Component({components: {DialogComponent, NavbarComponent, DrawerComponent, FooterComponent, SnackbarComponent}})
 export default class App extends Vue {
 
     created() {

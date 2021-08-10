@@ -21,6 +21,7 @@
     "vuex-module-decorators": "^1.0.1"
   },
   "devDependencies": {
+    "@mdi/js": "^5.9.55",
     "@types/luxon": "^1.27.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-typescript": "~4.5.0",

@@ -16,7 +16,7 @@
             />
         </div>
 
-        <v-btn text large class="pa-1">
+        <v-btn text large class="pa-1" @click="drawerModule.closeOpenDrawer">
             <div class="d-flex flex-column align-end mr-2">
                 <span class="grey--text text-capitalize" style="font-size: 10px">Admin</span>
                 <span class="text-capitalize">Silvio Franco</span>
@@ -38,12 +38,14 @@ import SnackbarModule from "@/store/SnackbarModule";
 import LoginService from "@/services/LoginService";
 import SessionModule from "@/store/SessionModule";
 import ConstantTool from "@/services/tool/ConstantTool";
+import DrawerModule from "@/store/DrawerModule";
 
 @Component
 export default class NavbarComponent extends Vue {
     sessionModule: SessionModule = getModule(SessionModule)
     snackbarModule: SnackbarModule = getModule(SnackbarModule)
     projectName: string = ConstantTool.PROJECT_NAME
+    drawerModule: DrawerModule = getModule(DrawerModule)
 
     get dark() {
         return this.$vuetify.theme.dark
