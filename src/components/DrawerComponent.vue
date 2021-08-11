@@ -13,7 +13,8 @@
                 <v-list-item two-line>
                     <v-badge bordered top color="#1BC5BD" dot offset-x="13" offset-y="7">
                         <v-avatar color="indigo" size="100" class="mr-2" rounded>
-                            <v-icon dark>
+                            <v-img v-if="sessionModule.session.user.avatar" :src="sessionModule.session.user.avatar.url" alt="Avatar" />
+                            <v-icon v-else dark>
                                 mdi-account-circle
                             </v-icon>
                         </v-avatar>
@@ -22,7 +23,9 @@
                         <strong class="subtitle-2 text-capitalize" style="font-size: 17px !important;">
                             {{sessionModule.session.user.name + " " + sessionModule.session.user.lastname}}
                         </strong>
-                        <span class="grey--text text-capitalize" style="font-size: 14px">Admin</span>
+                        <span class="grey--text text-capitalize" style="font-size: 14px">
+                            {{sessionModule.session.authorities[0].title}}
+                        </span>
                         <div>
                             <v-badge bordered top color="blue-grey lighten-4" dot offset-x="10" offset-y="18">
                                 <v-icon size="18" class="mr-1" color="primary">mdi-email</v-icon>

@@ -18,11 +18,14 @@
 
         <v-btn text large class="pa-1" @click="drawerModule.closeOpenDrawer">
             <div class="d-flex flex-column align-end mr-2">
-                <span class="grey--text text-capitalize" style="font-size: 10px">Admin</span>
-                <span class="text-capitalize">Silvio Franco</span>
+                <span class="grey--text text-capitalize" style="font-size: 10px">
+                    {{sessionModule.session.authorities[0].title}}
+                </span>
+                <span class="text-capitalize">{{sessionModule.session.user.name + " " + sessionModule.session.user.lastname}}</span>
             </div>
             <v-avatar color="indigo" size="35" rounded>
-                <v-icon dark>
+                <v-img v-if="sessionModule.session.user.avatar" :src="sessionModule.session.user.avatar.url" alt="Avatar" />
+                <v-icon v-else dark>
                     mdi-account-circle
                 </v-icon>
             </v-avatar>

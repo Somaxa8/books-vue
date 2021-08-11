@@ -17,7 +17,7 @@ class TypeConverter implements JsonCustomConvert<DocumentType> {
 }
 
 @JsonObject("Document")
-export default class Document extends Auditing {
+export default class Document {
 
     @JsonProperty("id", Number, true)
     id?: number = undefined
