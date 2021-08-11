@@ -33,7 +33,7 @@
                             <span style="font-size: 14px" class="grey--text">{{sessionModule.session.user.email}}</span>
                         </div>
                         <div>
-                            <v-btn color="primary" small elevation="0" width="110">Cerrar Sesión</v-btn>
+                            <v-btn color="primary" small elevation="0" width="110" @click="logout">Cerrar Sesión</v-btn>
                         </div>
                     </v-list-item-content>
 
@@ -62,6 +62,7 @@ import {Component, Vue} from "vue-property-decorator";
 import SessionModule from "@/store/SessionModule";
 import {getModule} from "vuex-module-decorators";
 import DrawerModule from "@/store/DrawerModule";
+import LoginService from "@/services/LoginService";
 
 @Component
 export default class DrawerComponent extends Vue {
@@ -73,11 +74,18 @@ export default class DrawerComponent extends Vue {
         {title: "Mis Libros", subtitle: "Mis libros subidos a la plataforma", color: "purple", icon: "mdi-book-open-page-variant", to: "/"},
         {title: "Subir Libro", subtitle: "Suba un libro a la plataforma", color: "warning", icon: "mdi-cloud-upload", to: "/"},
     ]
+
+
     get enabled() {
         return this.drawerModule.showDrawer
     }
+
     set enabled(enabled: boolean) {
         this.drawerModule.setDrawerEnabled(enabled)
+    }
+
+    logout() {
+        LoginService.logout(this)
     }
 }
 </script>
