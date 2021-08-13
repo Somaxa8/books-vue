@@ -34,9 +34,3 @@ export default class App extends Vue {
     }
 }
 </script>
-
-<style>
- #app {
-     background: #eef0f8;
- }
-</style>
