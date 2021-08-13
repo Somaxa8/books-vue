@@ -42,7 +42,7 @@
 
                 <v-list-item v-for="item in items" @click="$router.push(item.to)">
                     <v-list-item-icon style="margin-top: 5px">
-                        <v-avatar color="#f3f6f9" size="40" class="mr-2" rounded>
+                        <v-avatar color="deep-purple lighten-4" size="40" class="mr-2" rounded>
                             <v-icon :color="item.color">{{ item.icon }}</v-icon>
                         </v-avatar>
                     </v-list-item-icon>

@@ -10,17 +10,18 @@ export default new Vuetify({
             customProperties: true,
         },
         themes: {
+
             light: {
-                primary: '#004445',
+                primary: '#6f42c1',
                 secondary: '#2c7873',
-                accent: '#454545',
+                accent: '#181C32',
                 error: '#d9534f',
                 info: '#3da9de',
                 success: '#509950',
                 warning: '#f0ad4e'
             },
             dark: {
-                primary: '#2c7873',
+                primary: '#6f42c1',
                 secondary: '#454545',
                 accent: '#a49200',
                 error: '#d9534f',
@@ -31,6 +32,6 @@ export default new Vuetify({
         }
     },
     icons: {
-        iconfont: 'mdi'
+        iconfont: 'mdiSvg'
     }
 })
