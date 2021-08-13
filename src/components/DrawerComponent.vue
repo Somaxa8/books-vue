@@ -40,7 +40,7 @@
                 </v-list-item>
                 <v-divider class="my-2 mt-6 mb-6" />
 
-                <v-list-item v-for="item in items">
+                <v-list-item v-for="item in items" @click="$router.push(item.to)">
                     <v-list-item-icon style="margin-top: 5px">
                         <v-avatar color="#f3f6f9" size="40" class="mr-2" rounded>
                             <v-icon :color="item.color">{{ item.icon }}</v-icon>
@@ -69,7 +69,7 @@ export default class DrawerComponent extends Vue {
     sessionModule: SessionModule = getModule(SessionModule)
     drawerModule: DrawerModule = getModule(DrawerModule)
     items = [
-        {title: "Mi Perfil", subtitle: "Configuración de la cuenta y más", color: "light-green", icon: "mdi-card-account-details", to: "/"},
+        {title: "Mi Perfil", subtitle: "Configuración de la cuenta y más", color: "light-green", icon: "mdi-card-account-details", to: "/profile"},
         {title: "Mis Favoritos", subtitle: "Colección de sus libros favoritos", color: "error", icon: "mdi-cards-heart", to: "/"},
         {title: "Mis Libros", subtitle: "Mis libros subidos a la plataforma", color: "purple", icon: "mdi-book-open-page-variant", to: "/"},
         {title: "Subir Libro", subtitle: "Suba un libro a la plataforma", color: "warning", icon: "mdi-cloud-upload", to: "/"},
