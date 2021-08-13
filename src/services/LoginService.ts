@@ -6,6 +6,7 @@ import SessionModule from "@/store/SessionModule";
 import NavbarComponent from "@/components/NavbarComponent.vue";
 import {getModule} from "vuex-module-decorators";
 import JsonTool from "@/services/tool/JsonTool";
+import {Vue} from "vue-property-decorator";
 
 export default class LoginService {
 
@@ -40,7 +41,7 @@ export default class LoginService {
         }
     }
 
-    static logout(component: NavbarComponent) {
+    static logout(component: Vue) {
         let sessionModule: SessionModule = getModule(SessionModule)
         sessionModule.session.token = ""
         sessionModule.saveSession()
