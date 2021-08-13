@@ -8,6 +8,7 @@ Vue.use(VueRouter)
 const routes: Array<RouteConfig> = [
   { path: '/', name: 'home', component: () => import("@/views/HomeView.vue") },
   { path: '/login', name: 'login', component: () => import("@/views/LoginView.vue") },
+  { path: '/profile', name: 'profile', component: () => import("@/views/ProfileView.vue") },
 ]
 
 const router = new VueRouter({
