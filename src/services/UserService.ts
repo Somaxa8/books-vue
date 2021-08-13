@@ -96,10 +96,10 @@ export default class UserService {
         formData.set("avatarFile", avatarFile)
 
         try {
-            await component.axios.patch("/api/users/" + id + "/avatar/update", formData, {
+            const response = await component.axios.patch("/api/users/" + id + "/avatar/update", formData, {
                 headers: {Authorization: getModule(SessionModule).session.token}
             })
-
+            getModule(SessionModule).session.user = JsonTool.jsonConvert.deserializeObject(response.data, User)
             // @ts-ignore
             component.loading = false
         } catch (err) {
