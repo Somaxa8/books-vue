@@ -1,5 +1,4 @@
 import User from "@/models/User";
-import ConstantTool from "@/services/tool/ConstantTool";
 import {getModule} from "vuex-module-decorators";
 import SessionModule from "@/store/SessionModule";
 import {Vue} from "vue-property-decorator";
@@ -75,15 +74,13 @@ export default class UserService {
         // @ts-ignore
         component.loading = true
         try {
-            await component.axios.patch("/api/users/" + user.id,
+            const response = await component.axios.patch("/api/users/" + user.id,
                 user, {
                     headers: {Authorization: getModule(SessionModule).session.token}
-                })
+            })
+            getModule(SessionModule).session.user = JsonTool.jsonConvert.deserializeObject(response.data, User)
             // @ts-ignore
             component.loading = false
-            // @ts-ignore
-            component.refresh()
-
         } catch (err) {
             // @ts-ignore
             component.loading = false
@@ -102,6 +99,7 @@ export default class UserService {
             await component.axios.patch("/api/users/" + id + "/avatar/update", formData, {
                 headers: {Authorization: getModule(SessionModule).session.token}
             })
+
             // @ts-ignore
             component.loading = false
         } catch (err) {
