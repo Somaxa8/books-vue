@@ -72,7 +72,7 @@ export default class DrawerComponent extends Vue {
         {title: "Mi Perfil", subtitle: "Configuración de la cuenta y más", color: "light-green", icon: "mdi-card-account-details", to: "/profile"},
         {title: "Mis Favoritos", subtitle: "Colección de sus libros favoritos", color: "error", icon: "mdi-cards-heart", to: "/"},
         {title: "Mis Libros", subtitle: "Mis libros subidos a la plataforma", color: "purple", icon: "mdi-book-open-page-variant", to: "/"},
-        {title: "Subir Libro", subtitle: "Suba un libro a la plataforma", color: "warning", icon: "mdi-cloud-upload", to: "/"},
+        {title: "Subir Libro", subtitle: "Suba un libro a la plataforma", color: "warning", icon: "mdi-cloud-upload", to: "/books/upload"},
     ]
 
 
