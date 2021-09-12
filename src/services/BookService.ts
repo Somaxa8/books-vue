@@ -6,6 +6,7 @@ import {Vue} from "vue-property-decorator";
 import axios from "axios";
 import {DateTime} from "luxon";
 import SessionModule from "@/store/SessionModule";
+import BookCategory from "@/models/BookCategory";
 
 export default class BookService {
 
@@ -47,21 +48,24 @@ export default class BookService {
     }
 
     static async postBook(
-        component: Vue, languageId: number, title: string, author: string | null,
-        date: DateTime | null, editorial: string | null, description: string| null,
-        bookFile: File | null
+        component: Vue, languageId: string, title: string, author: string, editorial: string, description: string, bookFile: File, categories: BookCategory[]
     ) {
         // @ts-ignore
         component.loading = true
 
+        let categoryIds: string = ""
+        for (let category of categories) {
+            categoryIds = categoryIds + category.id + ","
+        }
+
         let formData = new FormData()
         formData.set("title", title)
         formData.set("author", author!)
-        formData.set("date", date!.toString())
-        formData.set("languageId", languageId.toString())
+        formData.set("languageId", languageId)
+        formData.set("categoryIds", "1,2")
         formData.set("editorial", editorial!)
         formData.set("description", description!)
-        formData.set("bookFile", bookFile!)
+        formData.set("bookFile", bookFile)
 
         try {
             await component.axios.post("/api/books", formData, {
@@ -70,8 +74,6 @@ export default class BookService {
             getModule(SnackbarModule).makeToast("Se ha creado el libro correctamente!")
             // @ts-ignore
             component.loading = false
-            // @ts-ignore
-            component.refresh()
             // @ts-ignore
             component.form.reset()
         } catch (err) {
