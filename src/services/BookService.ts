@@ -31,6 +31,29 @@ export default class BookService {
         }
     }
 
+    static async getMyBooks(component: Vue, books: Book[], page: number, size: number, search: string) {
+        // @ts-ignore
+        component.loading = true
+        const userId = getModule(SessionModule).session.user.id
+        try {
+            const response = await component.axios.get("/api/@me/users/" + userId + "/books", {
+                params: { page, size, search },
+                headers: {Authorization: getModule(SessionModule).session.token}
+            })
+            let list = JsonTool.jsonConvert.deserializeArray(response.data, Book)
+            books.splice(0, books.length)
+            list.forEach(v => books.push(v))
+            // @ts-ignore
+            component.totalItems = Number(response.headers["x-total-count"])
+            // @ts-ignore
+            component.loading = false
+        } catch (err) {
+            // @ts-ignore
+            component.loading = false
+            getModule(SnackbarModule).makeToast("No se han podido obtener tus libros")
+        }
+    }
+
     static async getBook(component: Vue, id: number) {
         // @ts-ignore
         component.loading = true

@@ -10,6 +10,7 @@ const routes: Array<RouteConfig> = [
     { path: '/login', name: 'login', component: () => import("@/views/LoginView.vue") },
     { path: '/profile', name: 'profile', component: () => import("@/views/ProfileView.vue") },
     { path: '/books/upload', name: 'booksUpload', component: () => import("@/views/UploadBookView.vue") },
+    { path: '/books/@me', name: 'myBooks', component: () => import("@/views/MyBooksView.vue") },
 ]
 
 const router = new VueRouter({

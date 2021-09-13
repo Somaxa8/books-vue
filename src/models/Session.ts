@@ -9,6 +9,6 @@ export default class Session {
     user!: User
     authorities!: Authority[]
 
-    dark: boolean = false
+    dark: boolean = true
 
 }

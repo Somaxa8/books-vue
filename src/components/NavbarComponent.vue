@@ -3,7 +3,7 @@
         <v-toolbar-title class="mr-8">{{projectName}}</v-toolbar-title>
 
         <v-btn class="ma-1 text-capitalize" elevation="0" @click="$router.push('/')">Inicio</v-btn>
-        <v-btn class="ma-1 text-capitalize" elevation="0">Mis Libros</v-btn>
+        <v-btn class="ma-1 text-capitalize" elevation="0" @click="$router.push('/books/@me')">Mis Libros</v-btn>
         <v-btn class="ma-1 text-capitalize" elevation="0">Mis Favoritos</v-btn>
 
         <v-spacer/>
