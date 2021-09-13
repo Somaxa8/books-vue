@@ -1,5 +1,5 @@
 <template>
-    <v-footer color="primary" style="overflow: hidden">
+    <v-footer color="primary" style="overflow: hidden" class="mt-6">
         <v-row justify="center">
             <v-col class="py-1 text-center white--text overline" cols="12">
                 &copy; {{ new Date().getFullYear() }} <strong>{{projectName}}</strong>
