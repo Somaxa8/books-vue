@@ -10,12 +10,12 @@ import BookCategory from "@/models/BookCategory";
 
 export default class BookService {
 
-    static async getBooks(component: Vue, books: Book[], page: number, size: number, search: string) {
+    static async getBooks(component: Vue, books: Book[], page: number, size: number, search: string, categoryId: number) {
         // @ts-ignore
         component.loading = true
         try {
             const response = await component.axios.get("/public/books", {
-                params: { page, size, search }
+                params: { page, size, categoryId, search }
             })
             let list = JsonTool.jsonConvert.deserializeArray(response.data, Book)
             books.splice(0, books.length)
@@ -31,13 +31,13 @@ export default class BookService {
         }
     }
 
-    static async getMyBooks(component: Vue, books: Book[], page: number, size: number, search: string) {
+    static async getMyBooks(component: Vue, books: Book[], page: number, size: number, search: string, categoryId: number, start: string | undefined, end: string | undefined) {
         // @ts-ignore
         component.loading = true
         const userId = getModule(SessionModule).session.user.id
         try {
             const response = await component.axios.get("/api/@me/users/" + userId + "/books", {
-                params: { page, size, search },
+                params: { page, size, search, categoryId, start, end },
                 headers: {Authorization: getModule(SessionModule).session.token}
             })
             let list = JsonTool.jsonConvert.deserializeArray(response.data, Book)
