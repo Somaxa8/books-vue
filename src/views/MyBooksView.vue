@@ -78,6 +78,20 @@
                     <template v-slot:item.createdAt="{item}">
                         {{item.createdAt.setLocale("es").toFormat('dd/MM/yy')}}
                     </template>
+                    <template v-slot:footer>
+                        <v-divider/>
+                        <v-row class="mt-2" align="center" justify="center">
+                            <v-btn class="ma-2" outlined color="primary" width="200" light @click="$router.push('/books/upload')">
+                                Subir libro
+                            </v-btn>
+
+                            <v-spacer />
+
+                            <div class="text-center pt-2">
+                                <v-pagination v-model="page" :length="pageCount"/>
+                            </div>
+                        </v-row>
+                    </template>
                 </v-data-table>
             </v-card-text>
         </v-card>
