@@ -54,6 +54,31 @@ export default class BookService {
         }
     }
 
+    static async getFavoriteBooks(component: Vue, books: Book[], page: number, size: number, search: string, categoryId: number,) {
+        // @ts-ignore
+        component.loading = true
+
+        const userId = getModule(SessionModule).session.user.id
+
+        try {
+            const response = await component.axios.get("/api/users/" + userId + "/books/favorites", {
+                params: { page, size, search, categoryId },
+                headers: {Authorization: getModule(SessionModule).session.token}
+            })
+            let list = JsonTool.jsonConvert.deserializeArray(response.data, Book)
+            books.splice(0, books.length)
+            list.forEach(v => books.push(v))
+            // @ts-ignore
+            component.totalItems = Number(response.headers["x-total-count"])
+            // @ts-ignore
+            component.loading = false
+        } catch (err) {
+            // @ts-ignore
+            component.loading = false
+            getModule(SnackbarModule).makeToast("No se han podido obtener tus libros favoritos")
+        }
+    }
+
     static async getBook(component: Vue, id: number) {
         // @ts-ignore
         component.loading = true
@@ -159,13 +184,11 @@ export default class BookService {
         component.loading = true
 
         try {
-            await component.axios.delete("/api/books/" + id + "/favorite", {
+            await component.axios.patch("/api/books/" + id + "/favorite", null, {
                 headers: {Authorization: getModule(SessionModule).session.token}
             })
             // @ts-ignore
-            component.loading = false;
-            // @ts-ignore
-            component.refresh();
+            component.loading = false
             getModule(SnackbarModule).makeToast("Se ha agregado el libro a mis favoritos")
         } catch (err) {
             // @ts-ignore
@@ -179,13 +202,13 @@ export default class BookService {
         component.loading = true
 
         try {
-            await component.axios.delete("/api/books/" + id + "/unfavorite", {
+            await component.axios.patch("/api/books/" + id + "/unfavorite", null, {
                 headers: {Authorization: getModule(SessionModule).session.token}
             })
             // @ts-ignore
             component.loading = false;
             // @ts-ignore
-            component.refresh();
+            component.refresh()
             getModule(SnackbarModule).makeToast("Se ha eliminado el libro de mis favoritos")
         } catch (err) {
             // @ts-ignore

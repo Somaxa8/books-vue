@@ -1,10 +1,12 @@
 <template>
     <v-app-bar app clipped-left height="80" elevate-on-scroll>
-        <v-toolbar-title class="mr-8">{{projectName}}</v-toolbar-title>
+        <v-toolbar-title class="mr-8">
+            <v-img :src="dark ? require('@/assets/logo-dark.png') : require('@/assets/logo.png')" width="200"/>
+        </v-toolbar-title>
 
         <v-btn class="ma-1 text-capitalize" elevation="0" @click="$router.push('/')">Inicio</v-btn>
         <v-btn class="ma-1 text-capitalize" elevation="0" @click="$router.push('/books/@me')">Mis Libros</v-btn>
-        <v-btn class="ma-1 text-capitalize" elevation="0">Mis Favoritos</v-btn>
+        <v-btn class="ma-1 text-capitalize" elevation="0" @click="$router.push('/books/@me/favorites')">Mis Favoritos</v-btn>
 
         <v-spacer/>
 
