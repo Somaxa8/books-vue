@@ -1,7 +1,7 @@
 <template>
     <v-container fluid class="fill-height pa-0">
         <v-row class="pa-0" style="height: 100%">
-            <v-col cols="12" md="6" class="pa-md-16">
+            <v-col cols="12" md="6" class="pa-md-16 pb-0" style="height: 100%">
                 <div class="d-flex flex-column mb-15">
                     <v-img :src="dark ? require('@/assets/logo-dark.png') : require('@/assets/logo.png')" width="200" @click="dark = !dark" class="mb-16"/>
                 </div>
