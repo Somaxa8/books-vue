@@ -105,12 +105,13 @@ export default class BookService {
         for (let category of categories) {
             categoryIds = categoryIds + category.id + ","
         }
+        categoryIds = categoryIds.slice(0, categoryIds.length - 1)
 
         let formData = new FormData()
         formData.set("title", title)
         formData.set("author", author!)
         formData.set("languageId", languageId)
-        formData.set("categoryIds", "1,2")
+        formData.set("categoryIds", categoryIds)
         formData.set("editorial", editorial!)
         formData.set("description", description!)
         formData.set("bookFile", bookFile)
