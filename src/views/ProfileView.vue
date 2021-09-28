@@ -78,8 +78,8 @@
 
                             </div>
                             <div class="mt-5" style="width: 70%">
-                                <v-text-field v-model="user.name" filled label="Nombre"/>
-                                <v-text-field v-model="user.lastname" filled label="Apellido"/>
+                                <v-text-field v-model="user.name" outlined label="Nombre"/>
+                                <v-text-field v-model="user.lastname" outlined label="Apellido"/>
 <!--                                <v-text-field v-model="user.email" filled prepend-inner-icon="mdi-email-edit" label="Email"/>-->
                             </div>
                         </v-form>
