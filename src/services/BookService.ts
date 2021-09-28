@@ -124,7 +124,7 @@ export default class BookService {
             // @ts-ignore
             component.loading = false
             // @ts-ignore
-            component.form.reset()
+            component.reset()
         } catch (err) {
             // @ts-ignore
             component.loading = false

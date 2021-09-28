@@ -72,7 +72,7 @@ export default class UploadBookView extends Vue {
     fileRules = [(v: File) => v ? true : "Campo requerido"]
     selectRules = [(v: string) => v ? true : "Campo requerido"]
     categoriesRules = [(v: []) => v.length > 0 ? true : "Campo requerido"]
-    textFieldRules = [(v: string) => v.length == 0 || v.length > 1 ? true : "El campo debe tener minimo 2 caracteres"]
+    textFieldRules = [(v: string) => v || v.length == 0 || v.length > 1 ? true : "El campo debe tener minimo 2 caracteres"]
 
     created() {
         BookCategoryService.getBookCategories(this, this.categories)
@@ -91,6 +91,16 @@ export default class UploadBookView extends Vue {
 
     coverMessage() {
         getModule(SnackbarModule).makeToast("La imagen de portada sera tomada del libro en cuestión.")
+    }
+
+    reset() {
+        this.title = ""
+        this.description = ""
+        this.author = ""
+        this.editorial = ""
+        this.languageId = ""
+        this.categoriesSelected = []
+        this.bookFile = null
     }
 }
 </script>
