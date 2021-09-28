@@ -11,6 +11,8 @@ const routes: Array<RouteConfig> = [
     { path: '/profile', name: 'profile', component: () => import("@/views/ProfileView.vue") },
     { path: '/books/upload', name: 'booksUpload', component: () => import("@/views/UploadBookView.vue") },
     { path: '/books/@me', name: 'myBooks', component: () => import("@/views/MyBooksView.vue") },
+    { path: '/books/:bookId', name: 'book', component: () => import("@/views/BookView.vue") },
+    { path: '/books/@me/favorites', name: 'favoritesBooks', component: () => import("@/views/FavoriteBooksView.vue") },
 ]
 
 const router = new VueRouter({
