@@ -20,15 +20,15 @@
                                         <v-card color="primary" class="d-flex justify-center align-center mb-6" height="340" @click="coverMessage">
                                             <v-icon x-large>mdi-image</v-icon>
                                         </v-card>
-                                        <v-text-field v-model="author" filled label="Autor" :rules="textFieldRules"/>
-                                        <v-text-field v-model="editorial" filled label="Editorial" :rules="textFieldRules"/>
+                                        <v-text-field v-model="author" outlined label="Autor" :rules="textFieldRules"/>
+                                        <v-text-field v-model="editorial" outlined label="Editorial" :rules="textFieldRules"/>
                                     </v-col>
                                     <v-col cols="9">
-                                        <v-text-field v-model="title" filled label="Titulo*" :rules="titleRules"/>
-                                        <v-file-input v-model="bookFile" label="Libro*" filled prepend-inner-icon="mdi-book-open-page-variant" prepend-icon="" accept=".epub,.pdf" :rules="fileRules"/>
-                                        <v-combobox v-model="categoriesSelected" :items="categories" item-text="title" filled label="Categorias*" prepend-inner-icon="mdi-shape" multiple chips :rules="categoriesRules"/>
-                                        <v-select v-model="languageId" :items="languages" item-value="id" item-text="title" filled label="Lenguaje*" prepend-inner-icon="mdi-translate" :rules="selectRules"/>
-                                        <v-textarea v-model="description" label="Descripción" filled rows="4" :rules="textFieldRules"/>
+                                        <v-text-field v-model="title" outlined label="Titulo*" :rules="titleRules"/>
+                                        <v-file-input v-model="bookFile" label="Libro*" outlined prepend-inner-icon="mdi-book-open-page-variant" prepend-icon="" accept=".epub,.pdf" :rules="fileRules"/>
+                                        <v-combobox v-model="categoriesSelected" :items="categories" item-text="title" outlined label="Categorias*" prepend-inner-icon="mdi-shape" multiple chips :rules="categoriesRules"/>
+                                        <v-select v-model="languageId" :items="languages" item-value="id" item-text="title" outlined label="Lenguaje*" prepend-inner-icon="mdi-translate" :rules="selectRules"/>
+                                        <v-textarea v-model="description" label="Descripción" outlined rows="5" :rules="textFieldRules"/>
                                     </v-col>
                                 </v-row>
                             </v-container>
