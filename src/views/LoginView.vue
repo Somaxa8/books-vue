@@ -1,46 +1,57 @@
 <template>
-    <v-container fluid class="fill-height pa-0">
-        <v-row class="pa-0" style="height: 100%">
-            <v-col cols="12" md="6" class="pa-md-16 pb-0" style="height: 100%">
-                <div class="d-flex flex-column mb-15">
-                    <v-img :src="dark ? require('@/assets/logo-dark.png') : require('@/assets/logo.png')" width="200" @click="dark = !dark" class="mb-16"/>
-                </div>
-                <v-form ref="form" class="pt-10">
-                    <h1 class="text-center text-md-left mb-6">Accede a tu cuenta</h1>
-                    <v-text-field
-                        @keydown.enter="$refs.loginButton.$el.click()"
-                        v-model="email" label="Email" name="email"
-                        prepend-icon="mdi-email" type="email"
-                        :rules="emailRules" @click:prepend="developLogin()"
-                    />
+    <v-container fluid class="pa-0 fill-height">
+        <v-row class="pa-0 fill-height">
+            <v-col cols="12" md="6" class="pa-0">
+                <v-tabs class="d-none" hide-slider v-model="tab">
+                    <v-tab>Login</v-tab>
+                    <v-tab>Register</v-tab>
+                </v-tabs>
+                <v-tabs-items v-model="tab" class="fill-height">
+                    <v-tab-item class="pa-15 pb-0">
+                        <div class="d-flex flex-column mb-15">
+                            <v-img :src="dark ? require('@/assets/logo-dark.png') : require('@/assets/logo.png')" width="200" @click="dark = !dark" class="mb-16"/>
+                        </div>
+                        <v-form ref="form" class="pt-10">
+                            <h1 class="text-center text-md-left mb-6">Accede a tu cuenta</h1>
+                            <v-text-field
+                                @keydown.enter="$refs.loginButton.$el.click()"
+                                v-model="email" label="Email" name="email"
+                                prepend-icon="mdi-email" type="email" outlined
+                                :rules="emailRules" @click:prepend="developLogin()"
+                            />
 
-                    <v-text-field
-                        @keydown.enter="$refs.loginButton.$el.click()"
-                        v-model="password" label="Contraseña"
-                        name="password" prepend-icon="mdi-lock"
-                        :type="showPassword ? 'text' : 'password'"
-                        @click:append="showPassword = !showPassword"
-                        :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'" :rules="passwordRules"
-                    />
-                    <v-btn
-                        class="mb-6 mt-4" :loading="progress"
-                        ref="loginButton" :key="loginButtonReset" block
-                        color="primary" large @click.once="login()">Acceder
-                    </v-btn>
-                </v-form>
+                            <v-text-field
+                                @keydown.enter="$refs.loginButton.$el.click()"
+                                v-model="password" label="Contraseña"
+                                name="password" prepend-icon="mdi-lock"
+                                :type="showPassword ? 'text' : 'password'"
+                                @click:append="showPassword = !showPassword" outlined
+                                :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'" :rules="passwordRules"
+                            />
+                            <v-btn
+                                class="mb-6 mt-4" :loading="progress"
+                                ref="loginButton" :key="loginButtonReset" block
+                                color="primary" large @click.once="login()">Acceder
+                            </v-btn>
+                        </v-form>
 
-                <h4 class="mb-6">No estás registrado? <span class="deep-purple--text v-chip--clickable" @click="$router.push('/')">Crea una cuenta</span></h4>
-                <div>
-                    <div class="grey--text">Hecho por Somaxa8, contáctame!</div>
-                    <div class="d-flex">
-                        <v-btn v-for="(item, i) in social" :key="i" icon @click="redirect(item.url)">
-                            <v-icon>{{ item.icon }}</v-icon>
-                        </v-btn>
-                    </div>
-                </div>
+                        <h4 class="mb-6">No estás registrado? <span class="deep-purple--text v-chip--clickable" @click="tab = 1">Crea una cuenta</span></h4>
+                        <div>
+                            <div class="grey--text">Hecho por Somaxa8, contáctame!</div>
+                            <div class="d-flex">
+                                <v-btn v-for="(item, i) in social" :key="i" icon @click="redirect(item.url)">
+                                    <v-icon>{{ item.icon }}</v-icon>
+                                </v-btn>
+                            </div>
+                        </div>
+                    </v-tab-item>
+                    <v-tab-item class="pa-15 pb-0">
+                        <RegisterTab :login="() => tab = 0"/>
+                    </v-tab-item>
+                </v-tabs-items>
             </v-col>
-            <v-col md="6" class="pa-0">
-                <v-img src="@/assets/background.jpg" height="100%" gradient="to top right, rgba(80, 36, 90, 0.7), rgba(80, 36, 90, 0.7)">
+            <v-col md="6" class="d-none d-md-block pa-0">
+                <v-img src="@/assets/background.jpg" class="fill-height" gradient="to top right, rgba(80, 36, 90, 0.7), rgba(80, 36, 90, 0.7)">
                     <div class="fill-height d-flex justify-center align-center pa-16">
                         <div>
                             <div class="d-flex justify-center" style="width: 100%">
@@ -70,12 +81,14 @@ import {getModule} from "vuex-module-decorators";
 import SnackbarModule from "@/store/SnackbarModule";
 import Session from "@/models/Session";
 import ProfileTool from "@/services/tool/ProfileTool";
+import RegisterTab from "@/components/tabs/RegisterTab.vue";
 
-@Component
+@Component({components:{RegisterTab}})
 export default class LoginView extends Vue {
     @Ref() readonly form!: HTMLFormElement
     @Ref() readonly loginButton!: HTMLButtonElement
     sessionModule: SessionModule = getModule(SessionModule)
+    tab: number = 0
     email: string = ""
     password: string = ""
     showPassword: boolean = false

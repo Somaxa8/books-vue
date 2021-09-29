@@ -7,28 +7,29 @@ import SnackbarModule from "@/store/SnackbarModule";
 
 export default class UserService {
 
-    static async postUser(component: Vue, name: string, email: string, password: string) {
+    static async postUser(component: Vue, name: string, lastname: string, email: string, password: string) {
         // @ts-ignore
         component.loading = true
 
         let formData = new FormData()
         formData.set("name", name)
+        formData.set("lastname", lastname)
         formData.set("email", email)
         formData.set("password", password)
 
         try {
-            const response = await component.axios.post("/api/users/register",
-                formData, {
+            await component.axios.post("/public/users/register", formData, {
                     headers: {Authorization: getModule(SessionModule).session.token}
             })
-            let item = JsonTool.jsonConvert.deserializeObject(response.data, User)
             // @ts-ignore
             component.loading = false
-            component.$router.push("/users/" + item.id)
+            // @ts-ignore
+            component.login()
+            getModule(SnackbarModule).makeToast("Usuario registrado correctamente!")
         } catch (err) {
             // @ts-ignore
             component.loading = false
-            getModule(SnackbarModule).makeToast("No se pudo crear el usuario")
+            getModule(SnackbarModule).makeToast("No se pudo registrar el usuario")
         }
     }
 
