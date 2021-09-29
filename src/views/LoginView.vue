@@ -1,5 +1,5 @@
 <template>
-    <v-container fluid class="pa-0 fill-height">
+    <v-container class="pa-0 fill-height overflow-hidden">
         <v-row class="pa-0 fill-height">
             <v-col cols="12" md="6" class="pa-0">
                 <v-tabs class="d-none" hide-slider v-model="tab">
