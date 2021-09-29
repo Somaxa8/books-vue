@@ -4,14 +4,20 @@
             <div class="pt-4 pb-4">
                 <h2 style="color: white">Busque sus libros</h2>
             </div>
-            <div class="white d-flex align-center" style="height: 64px; width: 55%; border-radius: 5px; padding: 8px 12px;">
-                <v-text-field v-model="search" @keydown.enter="refresh" solo flat label="Buscar" prepend-icon="mdi-magnify" style="height: 48px" light/>
-                <v-select
-                    v-model="categoryId" solo flat :items="categories" label="Categorias" prepend-icon="mdi-shape"
-                    clearable append-icon="" style="height: 48px" light item-text="title" item-value="id"
-                />
-                <v-btn @click="refresh" class="ml-4 text-capitalize" color="accent" light>Buscar</v-btn>
-            </div>
+            <v-container fluid>
+                <v-row>
+                    <v-col cols="12" sm="10" md="7">
+                        <div class="white d-flex align-center" style="height: 64px; border-radius: 5px; padding: 8px 12px;">
+                            <v-text-field v-model="search" @keydown.enter="refresh" solo flat label="Buscar" prepend-icon="mdi-magnify" style="height: 48px" light/>
+                            <v-select
+                                v-model="categoryId" solo flat :items="categories" label="Categorias" prepend-icon="mdi-shape"
+                                clearable append-icon="" style="height: 48px" light item-text="title" item-value="id"
+                            />
+                            <v-btn @click="refresh" class="ml-4 text-capitalize" color="accent" light>Buscar</v-btn>
+                        </div>
+                    </v-col>
+                </v-row>
+            </v-container>
         </div>
         <v-container fill-height fluid class="pl-15 pr-15">
             <v-row>
@@ -35,7 +41,7 @@
                             >
                                 <template v-slot:default="props">
                                     <v-row>
-                                        <v-col v-for="item in props.items" :key="item.id" cols="6" md="3" lg="3">
+                                        <v-col v-for="item in props.items" :key="item.id" cols="12" sm="6" md="3" lg="3">
                                             <v-card class="ma-2" elevation="0" @click="$router.replace('/books/' + item.id)" color="customGray">
                                                 <v-sheet class="d-flex justify-center align-center" color="primary" height="45vh">
                                                     <v-icon x-large>mdi-book</v-icon>
@@ -75,7 +81,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import {Component, Vue, Watch} from "vue-property-decorator";
 import ConstantTool from "@/services/tool/ConstantTool";
 import Book from "@/models/Book";
 import BookService from "@/services/BookService";
