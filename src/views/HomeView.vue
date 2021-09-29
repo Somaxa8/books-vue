@@ -29,7 +29,7 @@
                         <v-card-text>
                             <!--Skeleton Loader-->
                             <v-row v-if="loading">
-                                <v-col v-for="(item, i) in 8" :key="i" cols="6" md="3">
+                                <v-col v-for="(item, i) in 8" :key="i" cols="12" sm="6" md="3" lg="3">
                                     <v-skeleton-loader class="mx-auto" min-width="260" height="45vh" type="image@2"/>
                                 </v-col>
                             </v-row>
