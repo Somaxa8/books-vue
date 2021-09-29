@@ -37,8 +37,8 @@
 
                         <h4 class="mb-6">No estás registrado? <span class="deep-purple--text v-chip--clickable" @click="tab = 1">Crea una cuenta</span></h4>
                         <div>
-                            <div class="grey--text">Hecho por Somaxa8, contáctame!</div>
-                            <div class="d-flex">
+                            <div class="grey--text text-center text-md-start">Hecho por Somaxa8, contáctame!</div>
+                            <div class="d-flex justify-center justify-md-start">
                                 <v-btn v-for="(item, i) in social" :key="i" icon @click="redirect(item.url)">
                                     <v-icon>{{ item.icon }}</v-icon>
                                 </v-btn>

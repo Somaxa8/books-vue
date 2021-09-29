@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="d-flex flex-column">
-            <v-img :src="dark ? require('@/assets/logo-dark.png') : require('@/assets/logo.png')" width="200" @click="dark = !dark" class="mb-16"/>
+        <div class="d-flex flex-column align-center align-md-start mb-0 mb-md-8">
+            <v-img :src="dark ? require('@/assets/logo-dark.png') : require('@/assets/logo.png')" width="200" @click="dark = !dark" class="mb-4 mb-md-6"/>
         </div>
-        <v-form ref="form" class="pt-4">
+        <v-form ref="form" class="pt-0 pt-md-10">
             <h1 class="text-center text-md-left mb-6">Regístrate</h1>
             <v-text-field
                 @keydown.enter="$refs.registerButton.$el.click()"
@@ -41,8 +41,8 @@
         </v-form>
         <h4 class="mb-6">Ya tienes una cuenta? <span class="deep-purple--text v-chip--clickable" @click="login">Inicia sesión</span></h4>
         <div>
-            <div class="grey--text">Hecho por Somaxa8, contáctame!</div>
-            <div class="d-flex">
+            <div class="grey--text text-center text-md-start">Hecho por Somaxa8, contáctame!</div>
+            <div class="d-flex justify-center justify-md-start">
                 <v-btn v-for="(item, i) in social" :key="i" icon @click="redirect(item.url)">
                     <v-icon>{{ item.icon }}</v-icon>
                 </v-btn>
@@ -103,6 +103,10 @@ export default class RegisterTab extends Vue {
         if (this.form.validate()) {
             UserService.postUser(this, this.name, this.lastname, this.email, this.password)
         }
+    }
+
+    redirect(url : string) {
+        window.open(url)
     }
 
 }
