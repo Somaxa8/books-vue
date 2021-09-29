@@ -3,11 +3,12 @@
         <v-card>
             <v-card-title>Mis Favoritos</v-card-title>
             <v-card-text>
+                <v-skeleton-loader v-if="firstLoading" type="table"/>
                 <v-data-table
                     :headers="headers" :items="books" hide-default-footer :loading="loading"
                     :show-select="false" @page-count="pageCount = $event" loading-text="Cargando..."
                     :search="search" no-results-text="No hay resultados" no-data-text="No hay resultados"
-                    disable-sort
+                    disable-sort v-else
                 >
                     <template v-slot:top>
                         <v-container class="pa-0">
@@ -92,6 +93,7 @@ import BookCategoryService from "@/services/BookCategoryService";
 export default class FavoriteBooksView extends Vue {
     books: Book[] = []
     pageCount: number = 0
+    firstLoading: boolean = true
     loading: boolean = false
     page: number = 1
     itemsPerPage: number = 20
@@ -109,8 +111,9 @@ export default class FavoriteBooksView extends Vue {
         { text: "ACCIONES", value: "actions", width: "170px" }
     ]
 
-    refresh() {
-        BookService.getFavoriteBooks(this, this.books, this.page - 1, this.itemsPerPage, this.search, this.categoryId)
+    async refresh() {
+        await BookService.getFavoriteBooks(this, this.books, this.page - 1, this.itemsPerPage, this.search, this.categoryId)
+        this.firstLoading = false
     }
 
     created() {

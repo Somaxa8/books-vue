@@ -3,11 +3,12 @@
         <v-card>
             <v-card-title>Mis Libros</v-card-title>
             <v-card-text>
+                <v-skeleton-loader v-if="fistLoading" type="table"/>
                 <v-data-table
                     :headers="headers" :items="books" hide-default-footer :loading="loading"
                     :show-select="false" @page-count="pageCount = $event" loading-text="Cargando..."
                     :search="search" no-results-text="No hay resultados" no-data-text="No hay resultados"
-                    disable-sort
+                    disable-sort v-else
                 >
                     <template v-slot:top>
                         <v-container class="pa-0">
@@ -113,6 +114,7 @@ import BookCategoryService from "@/services/BookCategoryService";
 export default class MyBooksView extends Vue {
     books: Book[] = []
     pageCount: number = 0
+    fistLoading: boolean = true
     loading: boolean = false
     page: number = 1
     itemsPerPage: number = 20
@@ -134,8 +136,9 @@ export default class MyBooksView extends Vue {
         { text: "SUBIDO EL", value: "createdAt", width: "150px" }
     ]
 
-    refresh() {
-        BookService.getMyBooks(this, this.books, this.page - 1, this.itemsPerPage, this.search, this.categoryId, this.dates[0], this.dates[1])
+    async refresh() {
+        await BookService.getMyBooks(this, this.books, this.page - 1, this.itemsPerPage, this.search, this.categoryId, this.dates[0], this.dates[1])
+        this.fistLoading = false
     }
 
     created() {
