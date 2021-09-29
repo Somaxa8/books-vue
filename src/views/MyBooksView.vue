@@ -54,7 +54,7 @@
 
                         <v-tooltip bottom>
                             <template v-slot:activator="{ on, attrs }">
-                                <v-btn class="ma-1" icon v-bind="attrs" v-on="on">
+                                <v-btn class="ma-1" icon v-bind="attrs" v-on="on" @click="$router.push('/books/update/' + item.id)">
                                     <v-icon>mdi-pencil</v-icon>
                                 </v-btn>
                             </template>

@@ -132,15 +132,21 @@ export default class BookService {
         }
     }
 
-    static async patchBook(component: Vue, id: number, languageId: number, bookFile: File | null, book: Book) {
+    static async patchBook(component: Vue, id: number, languageId: string, bookFile: File | null, book: Book) {
         // @ts-ignore
         component.loading = true
+
+        let categoryIds: string = ""
+        for (let category of book.categories!) {
+            categoryIds = categoryIds + category.id + ","
+        }
+        categoryIds = categoryIds.slice(0, categoryIds.length - 1)
 
         let formData = new FormData()
         formData.set("title", book.title!)
         formData.set("author", book.author!)
-        formData.set("date", book.date!.toString())
-        formData.set("languageId", languageId.toString())
+        formData.set("languageId", languageId)
+        formData.set("categoryIds", categoryIds)
         formData.set("editorial", book.editorial!)
         formData.set("description", book.description!)
         formData.set("bookFile", bookFile!)
@@ -151,8 +157,7 @@ export default class BookService {
             })
             // @ts-ignore
             component.loading = false
-            // @ts-ignore
-            component.refresh()
+            getModule(SnackbarModule).makeToast("El libro se ha actualizado correctamente!")
         } catch (err) {
             // @ts-ignore
             component.loading = false
