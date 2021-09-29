@@ -8,10 +8,10 @@
                 </v-tabs>
                 <v-tabs-items v-model="tab" class="fill-height">
                     <v-tab-item class="pa-15 pb-0">
-                        <div class="d-flex flex-column mb-15">
-                            <v-img :src="dark ? require('@/assets/logo-dark.png') : require('@/assets/logo.png')" width="200" @click="dark = !dark" class="mb-16"/>
+                        <div class="d-flex flex-column align-center align-md-start mb-0 mb-md-8">
+                            <v-img :src="dark ? require('@/assets/logo-dark.png') : require('@/assets/logo.png')" width="200" @click="dark = !dark" class="mb-4 mb-md-6"/>
                         </div>
-                        <v-form ref="form" class="pt-10">
+                        <v-form ref="form" class="pt-0 pt-md-10">
                             <h1 class="text-center text-md-left mb-6">Accede a tu cuenta</h1>
                             <v-text-field
                                 @keydown.enter="$refs.loginButton.$el.click()"
