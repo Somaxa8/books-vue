@@ -4,7 +4,7 @@
             <div class="pt-4 pb-4">
                 <h2 style="color: white">Busque sus libros</h2>
             </div>
-            <div class="white d-flex align-center" style="height: 64px; width: 700px; border-radius: 5px; padding: 8px 12px">
+            <div class="white d-flex align-center" style="height: 64px; width: 55%; border-radius: 5px; padding: 8px 12px;">
                 <v-text-field v-model="search" @keydown.enter="refresh" solo flat label="Buscar" prepend-icon="mdi-magnify" style="height: 48px" light/>
                 <v-select
                     v-model="categoryId" solo flat :items="categories" label="Categorias" prepend-icon="mdi-shape"
@@ -21,22 +21,29 @@
                             Ultimos Libros
                         </v-card-title>
                         <v-card-text>
+                            <!--Skeleton Loader-->
+                            <v-row v-if="loading">
+                                <v-col v-for="(item, i) in 8" :key="i" cols="6" md="3">
+                                    <v-skeleton-loader class="mx-auto" min-width="260" height="45vh" type="image@2"/>
+                                </v-col>
+                            </v-row>
                             <v-data-iterator
+                                v-else
                                 :items="books" :items-per-page.sync="itemsPerPage" :page="page" :loading="loading"
                                 @page-count="pageCount = $event" no-results-text="No hay resultados"
                                 no-data-text="No hay resultados" loading-text="Cargando..." hide-default-footer
                             >
                                 <template v-slot:default="props">
                                     <v-row>
-                                        <v-col v-for="item in props.items" :key="item.id" cols="3">
+                                        <v-col v-for="item in props.items" :key="item.id" cols="6" md="3" lg="3">
                                             <v-card class="ma-2" elevation="0" @click="$router.replace('/books/' + item.id)" color="customGray">
-                                                <v-sheet class="d-flex justify-center align-center" color="primary" height="300">
+                                                <v-sheet class="d-flex justify-center align-center" color="primary" height="45vh">
                                                     <v-icon x-large>mdi-book</v-icon>
                                                 </v-sheet>
                                                 <v-card-actions class="d-flex flex-column">
                                                     <h4 class="text-capitalize">{{ item.title }}</h4>
-                                                    <span class="grey--text text-start">
-                                                        Autor - <spam class="white--text text-capitalize">{{ item.author }}</spam>
+                                                    <span class="font-weight-bold text-start">
+                                                        Autor - <spam class="font-weight-regular text-capitalize">{{ item.author }}</spam>
                                                     </span>
                                                 </v-card-actions>
                                             </v-card>
