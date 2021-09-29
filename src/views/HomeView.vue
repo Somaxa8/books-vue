@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="d-flex flex-column pl-15 search">
+        <div class="d-flex flex-column pl-0 pl-md-15 search">
             <div class="pt-4 pb-4">
-                <h2 style="color: white">Busque sus libros</h2>
+                <h2 class="pl-3 pl-md-0" style="color: white">Busque sus libros</h2>
             </div>
             <v-container fluid>
                 <v-row>
@@ -19,7 +19,7 @@
                 </v-row>
             </v-container>
         </div>
-        <v-container fill-height fluid class="pl-15 pr-15">
+        <v-container fill-height fluid class="pl-2 pr-2 pl-md-15 pr-md-15">
             <v-row>
                 <v-col cols="12">
                     <v-card class="mb-8" elevation="0" rounded>
