@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-row>
-            <v-col cols="4">
+            <v-col cols="12" sm="6" md="4">
                 <v-card elevation="0">
                     <v-card-text>
                         <div class="d-flex flex-row pl-4 pr-4 mt-4 mb-4">
@@ -43,7 +43,7 @@
                     </v-card-text>
                 </v-card>
             </v-col>
-            <v-col cols="8">
+            <v-col cols="12" sm="6" md="8">
                 <v-card elevation="0" class="mb-8">
                     <v-card-title>
                         <div>
