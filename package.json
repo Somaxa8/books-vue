@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "crypto-js": "^4.0.0",
+    "epubjs": "^0.3.88",
     "json2typescript": "^1.4.1",
     "luxon": "^1.27.0",
     "vue": "^2.6.11",
