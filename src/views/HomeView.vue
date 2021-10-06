@@ -43,8 +43,13 @@
                                     <v-row>
                                         <v-col v-for="item in props.items" :key="item.id" cols="12" sm="6" md="3" lg="3">
                                             <v-card class="ma-2" elevation="0" @click="$router.replace('/books/' + item.id)" color="customGray">
-                                                <v-sheet class="d-flex justify-center align-center" color="primary" height="45vh">
-                                                    <v-icon x-large>mdi-book</v-icon>
+                                                <v-sheet  color="primary" height="45vh">
+                                                    <v-chip style="position: absolute" class="ma-2" :color="item.book.extension === 'epub' ? 'error' : 'warning'" label>
+                                                        {{item.book.extension.toUpperCase()}}
+                                                    </v-chip>
+                                                    <div class="fill-height d-flex justify-center align-center">
+                                                        <v-icon x-large>mdi-book</v-icon>
+                                                    </div>
                                                 </v-sheet>
                                                 <v-card-actions class="d-flex flex-column">
                                                     <h4 class="text-capitalize">{{ item.title }}</h4>
