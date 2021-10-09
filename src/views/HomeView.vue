@@ -27,21 +27,21 @@
                             Ultimos Libros
                         </v-card-title>
                         <v-card-text>
-                            <!--Skeleton Loader-->
-                            <v-row v-if="loading">
-                                <v-col v-for="(item, i) in 8" :key="i" cols="12" sm="6" md="3" lg="3">
-                                    <v-skeleton-loader class="mx-auto" min-width="260" height="45vh" type="image@2"/>
-                                </v-col>
-                            </v-row>
                             <v-data-iterator
-                                v-else
-                                :items="books" :items-per-page.sync="itemsPerPage" :page="page" :loading="loading"
-                                @page-count="pageCount = $event" no-results-text="No hay resultados"
-                                no-data-text="No hay resultados" loading-text="Cargando..." hide-default-footer
+                                :items="books" :loading="loading" :options.sync="options" :items-per-page="itemsPerPage"
+                                :page.sync="page" :server-items-length="totalItems" @page-count="pageCount = $event"
+                                no-results-text="No hay resultados" no-data-text="No hay resultados"
+                                loading-text="Cargando..." hide-default-footer disable-sort
                             >
-                                <template v-slot:default="props">
-                                    <v-row>
-                                        <v-col v-for="item in props.items" :key="item.id" cols="12" sm="6" md="3" lg="3">
+                                <template v-slot:default="{items}">
+                                    <!--Skeleton Loader-->
+                                    <v-row v-if="loading">
+                                        <v-col v-for="(_, i) in 8" :key="i" cols="12" sm="6" md="3" lg="3">
+                                            <v-skeleton-loader class="mx-auto mb-2" min-width="260" height="45vh" type="image@2"/>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row v-show="!loading">
+                                        <v-col v-for="item in items" :key="item.id" cols="12" sm="6" md="3" lg="3">
                                             <v-card class="ma-2" elevation="0" @click="$router.replace('/books/' + item.id)" color="customGray">
                                                 <v-sheet  color="primary" height="45vh">
                                                     <v-chip style="position: absolute" class="ma-2" :color="item.book.extension === 'epub' ? 'error' : 'warning'" label>
@@ -54,7 +54,7 @@
                                                 <v-card-actions class="d-flex flex-column">
                                                     <h4 class="text-capitalize">{{ item.title }}</h4>
                                                     <span class="font-weight-bold text-start">
-                                                        Autor - <spam class="font-weight-regular text-capitalize">{{ item.author }}</spam>
+                                                        Autor - <span class="font-weight-regular text-capitalize">{{ item.author }}</span>
                                                     </span>
                                                 </v-card-actions>
                                             </v-card>
@@ -64,6 +64,7 @@
 
                                 <template v-slot:footer>
                                     <v-divider/>
+                                    <v-progress-linear :indeterminate="true" :active="loading"/>
                                     <v-row class="mt-2" align="center" justify="center">
                                         <v-btn class="ma-2" outlined color="primary" width="200" light @click="$router.push('/books/upload')">
                                             Subir libro
@@ -72,7 +73,7 @@
                                         <v-spacer />
 
                                         <div class="text-center pt-2">
-                                            <v-pagination v-model="page" :length="pageCount"/>
+                                            <v-pagination v-model="page" :length="pageCount" :total-visible="8"/>
                                         </div>
                                     </v-row>
                                 </template>
@@ -92,6 +93,7 @@ import Book from "@/models/Book";
 import BookService from "@/services/BookService";
 import BookCategory from "@/models/BookCategory";
 import BookCategoryService from "@/services/BookCategoryService";
+import Options from "@/models/vue/Options";
 
 @Component
 export default class HomeView extends Vue {
@@ -99,12 +101,15 @@ export default class HomeView extends Vue {
     projectName: string = ConstantTool.PROJECT_NAME
     page: number = 1
     pageCount: number = 0
-    itemsPerPage: number = 30
+    itemsPerPage: number = 28
+    totalItems: number = 0
+    options: Options = new Options()
     search: string = ""
     books: Book[] = []
     categories: BookCategory[] = []
     categoryId!: number
 
+    @Watch("options")
     refresh() {
         BookService.getBooks(this, this.books, this.page - 1, this.itemsPerPage, this.search, this.categoryId)
     }

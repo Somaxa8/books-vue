@@ -5,16 +5,17 @@
             <v-card-text>
                 <v-skeleton-loader v-if="firstLoading" type="table"/>
                 <v-data-table
-                    :headers="headers" :items="books" hide-default-footer :loading="loading"
-                    :show-select="false" @page-count="pageCount = $event" loading-text="Cargando..."
-                    :search="search" no-results-text="No hay resultados" no-data-text="No hay resultados"
-                    disable-sort v-else
+                    :headers="headers" :items="books" :loading="loading" :options.sync="options"
+                    @page-count="pageCount = $event" :search="search" :server-items-length="totalItems"
+                    :items-per-page="itemsPerPage" :page.sync="page" loading-text="Cargando..."
+                    :show-select="false" hide-default-footer no-results-text="No hay resultados"
+                    no-data-text="No hay resultados" disable-sort v-else
                 >
                     <template v-slot:top>
                         <v-container class="pa-0">
                             <v-row>
                                 <v-col cols="4">
-                                    <v-text-field v-model="search" dense outlined label="Buscar"/>
+                                    <v-text-field v-model="search" dense outlined label="Buscar" @keydown.enter="refresh" append-icon="mdi-magnify" @click:append="refresh"/>
                                 </v-col>
                                 <v-col cols="3">
                                     <v-select v-model="categoryId" @change="refresh" dense outlined :items="categories" label="Categorias" clearable item-text="title" item-value="id"/>
@@ -60,6 +61,7 @@
                     </template>
                     <template v-slot:footer>
                         <v-divider/>
+                        <v-progress-linear :indeterminate="true" :active="loading"/>
                         <v-row class="mt-2" align="center" justify="center">
                             <v-btn class="ma-2" outlined color="primary" width="200" light @click="$router.push('/books/upload')">
                                 Subir libro
@@ -68,7 +70,7 @@
                             <v-spacer />
 
                             <div class="text-center pt-2">
-                                <v-pagination v-model="page" :length="pageCount"/>
+                                <v-pagination v-model="page" :length="pageCount" :total-visible="8"/>
                             </div>
                         </v-row>
                     </template>
@@ -96,7 +98,7 @@ export default class FavoriteBooksView extends Vue {
     firstLoading: boolean = true
     loading: boolean = false
     page: number = 1
-    itemsPerPage: number = 20
+    itemsPerPage: number = 3
     totalItems: number = 0
     options: Options = new Options()
     search: string = ""
@@ -111,9 +113,11 @@ export default class FavoriteBooksView extends Vue {
         { text: "ACCIONES", value: "actions", width: "170px" }
     ]
 
+    @Watch("options")
     async refresh() {
         await BookService.getFavoriteBooks(this, this.books, this.page - 1, this.itemsPerPage, this.search, this.categoryId)
         this.firstLoading = false
+        console.log(this.totalItems)
     }
 
     created() {
