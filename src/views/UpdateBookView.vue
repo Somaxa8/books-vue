@@ -17,7 +17,10 @@
                             <v-container>
                                 <v-row>
                                     <v-col cols="3">
-                                        <v-card color="primary" class="d-flex justify-center align-center mb-6" height="340" @click="coverMessage">
+                                        <v-card v-if="book.cover" class="mb-6">
+                                            <v-img :src="book.cover.url" :alt="book.title" height="340"/>
+                                        </v-card>
+                                        <v-card v-else color="primary" class="d-flex justify-center align-center mb-6" height="340" @click="coverMessage">
                                             <v-icon x-large>mdi-image</v-icon>
                                         </v-card>
                                         <v-text-field v-model="book.author" outlined label="Autor" :rules="textFieldRules"/>
