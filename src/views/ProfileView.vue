@@ -91,7 +91,7 @@
 
                                     </div>
                                     <div class="mt-5" style="width: 70%">
-                                        <v-text-field v-model="user.name" outlined label="Nombre"/>
+                                        <v-text-field v-model="user.name" outlined label="Nombre" :rules="nameRules"/>
                                         <v-text-field v-model="user.lastname" outlined label="Apellido"/>
                                     </div>
                                 </v-form>
@@ -130,6 +130,7 @@ export default class ProfileView extends Vue {
         {title: "Mis Libros", subtitle: "Mis libros subidos a la plataforma", color: "purple", icon: "mdi-book-open-page-variant", to: "/books/@me"},
         {title: "Subir Libro", subtitle: "Suba un libro a la plataforma", color: "warning", icon: "mdi-cloud-upload", to: "/"},
     ]
+    nameRules = [(v: string) => v.length > 1 ? true : "El nombre debe tener mínimo 2 caracteres"]
 
     updateUser() {
         getModule(DialogModule).showDialog(new Dialog(
