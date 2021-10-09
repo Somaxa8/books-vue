@@ -22,6 +22,8 @@ export default class Book extends Auditing {
     date?: DateTime = undefined
     @JsonProperty("book", Document, true)
     book?: Document = undefined
+    @JsonProperty("cover", Document, true)
+    cover?: Document = undefined
     @JsonProperty("language", Language, true)
     language?: Language = undefined
 

@@ -17,7 +17,10 @@
                             <v-container class="pa-0">
                                 <v-row>
                                     <v-col cols="12" sm="6" md="4">
-                                        <v-card color="primary" class="d-flex justify-center align-center mb-4" height="440">
+                                        <v-card v-if="book.cover" class="mb-4">
+                                            <v-img :src="book.cover.url" :alt="book.title" height="440"/>
+                                        </v-card>
+                                        <v-card v-else color="primary" class="d-flex justify-center align-center mb-4" height="440">
                                             <v-icon x-large>mdi-image</v-icon>
                                         </v-card>
                                         <v-btn class="mb-4" color="error" block @click="addFavorite">
