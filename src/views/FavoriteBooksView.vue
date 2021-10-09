@@ -117,7 +117,6 @@ export default class FavoriteBooksView extends Vue {
     async refresh() {
         await BookService.getFavoriteBooks(this, this.books, this.page - 1, this.itemsPerPage, this.search, this.categoryId)
         this.firstLoading = false
-        console.log(this.totalItems)
     }
 
     created() {

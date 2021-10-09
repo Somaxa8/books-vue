@@ -120,10 +120,6 @@ export default class LoginView extends Vue {
     }
 
     created() {
-        if (ProfileTool.isDev()) {
-            this.email = "admin@somacode.com"
-            this.password = "1234"
-        }
 
         this.sessionModule.setSession(new Session());
         this.sessionModule.saveSession()
@@ -132,15 +128,6 @@ export default class LoginView extends Vue {
     login() {
         if (this.form.validate()) {
             LoginService.postLogin(this, this.email, this.password, getModule(SnackbarModule), this.sessionModule)
-        }
-    }
-
-    count: number = 0
-    developLogin() {
-        this.count++
-        if (this.count % 3 == 0) {
-            this.email = "admin@somacode.com"
-            this.password = "1234"
         }
     }
 
