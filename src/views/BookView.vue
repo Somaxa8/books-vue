@@ -44,7 +44,7 @@
                                             </span>
                                             <span class="mb-1 info-book">
                                                 <b>Extensión: </b>
-                                                <v-chip :color="book.book.extension == 'epub' ? 'error' : 'warning'" small label outlined>
+                                                <v-chip :color="book.book.extension === 'epub' ? 'error' : 'warning'" small label outlined>
                                                     {{book.book.extension.toUpperCase()}}
                                                 </v-chip>
                                             </span>
@@ -54,17 +54,13 @@
                                             <div>
                                                 <v-chip v-for="(category, i) in book.categories" :key="category.id" class="ma-2 ml-0" color="success" outlined>{{category.title}}</v-chip>
                                             </div>
-                                            <div v-if="book.description">
-                                                <span>Descripción:</span>
-                                                <p>{{ book.description }}</p>
-                                            </div>
                                         </div>
                                     </v-col>
 <!--                                    <v-col v-if="firstLoading" cols="12" sm="6" md="8" class="pt-3" style="min-height: 700px">-->
 <!--                                        <v-skeleton-loader width="100%" height="100%" type="image@4"/>-->
 <!--                                    </v-col>-->
                                     <v-col cols="12" sm="6" md="8" class="pt-3" style="min-height: 700px">
-                                        <v-card v-if="book.book.extension === 'epub'" light height="100%">
+                                        <v-card v-if="book.book.extension === 'epub'" light max-height="714" height="100%">
                                             <div class="d-flex justify-space-between">
                                                 <v-btn icon @click="prev" class="ma-2">
                                                     <v-icon>mdi-chevron-left</v-icon>
@@ -76,7 +72,15 @@
                                             </div>
                                             <div ref="epubElement" />
                                         </v-card>
-                                        <iframe v-else style="border: none; border-radius: 4px" :src="'https://docs.google.com/viewer?url='+ book.book.url +'&embedded=true'" width="100%" height="100%"/>
+                                        <iframe v-else style="border: none; border-radius: 4px; max-height: 714px" :src="'https://docs.google.com/viewer?url='+ book.book.url +'&embedded=true'" width="100%" height="100%"/>
+                                    </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-col cols="12">
+                                        <div v-if="book.description">
+                                            <span class="mb-1 info-book">Descripción:</span>
+                                            <div v-html="book.description"></div>
+                                        </div>
                                     </v-col>
                                 </v-row>
                             </v-container>
