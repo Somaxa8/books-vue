@@ -98,7 +98,7 @@ export default class FavoriteBooksView extends Vue {
     firstLoading: boolean = true
     loading: boolean = false
     page: number = 1
-    itemsPerPage: number = 3
+    itemsPerPage: number = 10
     totalItems: number = 0
     options: Options = new Options()
     search: string = ""
