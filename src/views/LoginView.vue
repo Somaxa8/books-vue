@@ -17,7 +17,7 @@
                                 @keydown.enter="$refs.loginButton.$el.click()"
                                 v-model="email" label="Email" name="email"
                                 prepend-icon="mdi-email" type="email" outlined
-                                :rules="emailRules" @click:prepend="developLogin()"
+                                :rules="emailRules"
                             />
 
                             <v-text-field
