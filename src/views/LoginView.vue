@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="text-center grey--text text--lighten-2 text-h6 pa-8 pt-0">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus consequatur cum deserunt eos facilis harum in ipsam natus non placeat porro quidem quisquam quos reiciendis reprehenderit.
+                                Somacode Books es un portal web para descargar libros gratis y de forma legal. Todos nuestros libros están en domino público o con licencias abiertas.
                             </div>
                         </div>
                     </div>
