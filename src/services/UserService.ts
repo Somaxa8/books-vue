@@ -140,8 +140,6 @@ export default class UserService {
             getModule(SnackbarModule).makeToast("Contraseña cambiada con exito")
             // @ts-ignore
             component.loading = false
-            // @ts-ignore
-            component.changePasswordDialog = false
         } catch (err) {
             // @ts-ignore
             component.loading = true
